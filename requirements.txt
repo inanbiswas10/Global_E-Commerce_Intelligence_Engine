@@ -11,8 +11,11 @@ plotly
 # Web app / dashboard
 streamlit
 
-# Machine learning (for trend & forecast analysis later)
+# Machine learning (for later trend/forecast analysis)
 scikit-learn
+
+# Forecasting
+statsmodels
 
 # Utilities
 python-dotenv
