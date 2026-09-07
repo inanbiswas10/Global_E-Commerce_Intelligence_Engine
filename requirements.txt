@@ -1,0 +1,20 @@
+# Core data processing
+pandas
+numpy
+pyarrow
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Web app / dashboard
+streamlit
+
+# Machine learning (for trend & forecast analysis later)
+scikit-learn
+
+# Utilities
+python-dotenv
+openpyxl
+requests
