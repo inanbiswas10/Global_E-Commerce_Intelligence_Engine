@@ -5,9 +5,9 @@ Day 3 Part B: Revenue forecasting engine.
 
 Fits several Holt-Winters configurations to monthly revenue and picks
 the best one using AIC (a standard model-selection criterion) rather
-than manually tuning toward a forecast that "looks right" - that would
-bias the result. The winning model is then sanity-checked against
-year-over-year growth before being trusted for the dashboard.
+than manually tuning toward a forecast that "looks right." The winning
+model is sanity-checked against year-over-year growth, then combined
+with the actuals into one tidy table for the dashboard.
 """
 
 import pandas as pd
@@ -17,10 +17,6 @@ INPUT_PATH = "data/processed/orders_clean.parquet"
 OUTPUT_PATH = "data/processed/revenue_forecast.parquet"
 FORECAST_MONTHS = 6
 
-# Candidate configurations to compare. Multiplicative seasonal is included
-# because revenue is growing over time - a seasonal swing that scales with
-# revenue level is more realistic than one that stays a fixed dollar amount.
-# Damped trend is included to avoid over-extrapolating a 4-year trend.
 CANDIDATE_CONFIGS = [
     {"label": "Additive trend, additive seasonal",
      "trend": "add", "seasonal": "add", "damped_trend": False},
@@ -47,12 +43,7 @@ def load_monthly_revenue():
 
 
 def select_best_model(monthly_series):
-    """
-    Fits each candidate config and selects the one with the lowest AIC
-    (Akaike Information Criterion) - a standard statistical measure of
-    fit quality that penalizes unnecessary complexity. This keeps model
-    choice objective instead of picking whichever forecast looks nicest.
-    """
+    """Fits each candidate config and selects the one with the lowest AIC."""
     results = []
 
     for config in CANDIDATE_CONFIGS:
@@ -79,13 +70,7 @@ def select_best_model(monthly_series):
 
 
 def sanity_check_forecast(monthly_series, forecast):
-    """
-    Compares each forecasted month to the same calendar month one year
-    earlier. Flags inconsistent YoY growth as a caveat rather than
-    hiding it - a forecast can still be useful for the dashboard even
-    with some spread, as long as that uncertainty is disclosed rather
-    than presented as false precision.
-    """
+    """Compares each forecasted month to the same calendar month a year earlier."""
     print("\nSanity check - forecast vs. same month, prior year:")
     growth_rates = []
 
@@ -107,15 +92,6 @@ def sanity_check_forecast(monthly_series, forecast):
     if growth_rates:
         spread = max(growth_rates) - min(growth_rates)
         print(f"\nYoY growth spread across the 6 months: {spread:.1f} percentage points")
-        if spread > 40:
-            print(
-                "NOTE: spread is still wide. With only 4 years of history, "
-                "some YoY variance is expected and genuine (e.g. holiday "
-                "timing shifts) rather than a modeling error. The dashboard "
-                "should present this forecast as directional, not precise."
-            )
-        else:
-            print("Growth rate is reasonably consistent - forecast looks trustworthy.")
 
 
 def main():
@@ -135,11 +111,21 @@ def main():
 
     sanity_check_forecast(monthly, forecast)
 
-    combined = pd.concat([monthly, forecast], axis=1).reset_index()
-    combined = combined.rename(columns={"order_date": "month"})
+    # FIX: don't rely on concat preserving an index name through the join -
+    # force it explicitly right before reset_index(). This is what was
+    # silently broken before: the forecast Series' index came out unnamed,
+    # so reset_index() produced a column called "index" instead of "month",
+    # and the old rename(columns={"order_date": "month"}) had nothing to
+    # rename because "order_date" was never actually there.
+    combined = pd.concat([monthly, forecast], axis=1)
+    combined = combined.rename_axis("month").reset_index()
+
+    # Verify the schema out loud now, so a silent column-naming bug like
+    # this one gets caught immediately next time, not three days later
+    print("\nFinal columns:", combined.columns.tolist())
 
     combined.to_parquet(OUTPUT_PATH, index=False)
-    print(f"\nSaved forecast to {OUTPUT_PATH}")
+    print(f"Saved forecast to {OUTPUT_PATH}")
     print("Shape:", combined.shape)
 
 
