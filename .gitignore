@@ -1,35 +1,48 @@
 # Virtual environment
+
 .venv/
 venv/
 env/
 
 # Python cache
+
 __pycache__/
 *.py[cod]
 *$py.class
 
 # Jupyter
+
 .ipynb_checkpoints/
 
 # Environment variables (API keys etc.)
 .env
 
 # OS files
+
 .DS_Store
 Thumbs.db
 
-# Data (raw/processed data can be large — not tracked in git)
+# Raw data can be large - not tracked, only the folder placeholder is.
+# Processed data IS committed (not ignored below) - the deployed app
+# needs these files at runtime, and they're small, derived, and safe
+# to version.
+
 data/raw/*
-data/processed/*
 !data/raw/.gitkeep
-!data/processed/.gitkeep
 
 # Streamlit secrets
+
 .streamlit/secrets.toml
 
 # IDE
+
 .vscode/
 .idea/
 
 # Logs
+
 *.log
+
+# Pytest cache
+
+.pytest_cache/

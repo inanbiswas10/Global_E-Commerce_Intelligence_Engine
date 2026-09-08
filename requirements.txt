@@ -1,23 +1,33 @@
 # Core data processing
+
 pandas
 numpy
 pyarrow
 
 # Visualization
+
 matplotlib
 seaborn
 plotly
 
 # Web app / dashboard
+
 streamlit
 
-# Machine learning (for later trend/forecast analysis)
+# Machine learning (for trend & forecast analysis)
+
 scikit-learn
 
 # Forecasting
+
 statsmodels
 
+# Testing
+
+pytest
+
 # Utilities
+
 python-dotenv
 openpyxl
 requests
