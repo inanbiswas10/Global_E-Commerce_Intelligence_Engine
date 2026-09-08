@@ -2,9 +2,17 @@
 
 # Global E-Commerce Intelligence Engine - main Streamlit application.
 
-# Day 4 Part B: adds the revenue trend/forecast chart, market performance,
-# sub-category profitability, the discount-vs-profit scatter, and the risk
-# watchlist table beneath the Part A header and KPI strip.
+import os
+import sys
+
+# Explicitly add this file's own folder to Python's import path. Locally,
+# `streamlit run app\main.py` resolved sibling imports (theme, data_loader,
+# charts) without this - but Streamlit Community Cloud's container doesn't
+# extend that same courtesy to a main file living inside a subdirectory.
+# This line makes the import work identically on any platform, instead of
+# depending on that environment-specific behavior.
+
+sys.path.insert (0,os.path.dirname (os.path.abspath (__file__)))
 
 import streamlit as st
 from theme import COLORS,inject_theme
@@ -48,22 +56,19 @@ selected_categories = st.sidebar.multiselect (
 year_min = int (orders ["order_year"].min ())
 year_max = int (orders ["order_year"].max ())
 selected_years = st.sidebar.slider (
-    "Order year",min_value = year_min,max_value = year_max,
-    value = (year_min,year_max),
-)
+    "Order Year",min_value = year_min,max_value = year_max,
+    value = (year_min,year_max),)
 
 filtered_orders = orders [
     orders ["market"].isin (selected_markets)
     & orders ["category"].isin (selected_categories)
-    & orders ["order_year"].between (selected_years [0],selected_years [1])
-]
+    & orders ["order_year"].between (selected_years [0],selected_years [1])]
 
 st.sidebar.markdown ("---")
 st.sidebar.markdown (
     f"<span style='color:{COLORS ['text_secondary']}; font-size:0.8rem;'>"
     f"{len (filtered_orders):,} of {len (orders):,} orders shown</span>",
-    unsafe_allow_html = True,
-)
+    unsafe_allow_html = True,)
 
 # --- Header ---
 
@@ -75,7 +80,7 @@ with header_col:
     st.markdown (
         """
         <div class="hero-wordmark">GLOBAL E-COMMERCE INTELLIGENCE ENGINE</div>
-        <div class="hero-title">Where the business is making money & where it isn't -</div>
+        <div class="hero-title">Where the business is making money & where it isn't !!</div>
         <div class="hero-subtitle">
             51,290 orders across 23 regions during the period of 2012–2015. Profit-risk scoring
             and a revenue forecast built directly on top of the raw
@@ -95,7 +100,7 @@ with ticker_col:
         """
     else:
         ticker_html = """
-        <div class="fx-ticker">FX Rate Unavailable Right Now</div>
+        <div class="fx-ticker">FX Rate Unavailable Right Now !!</div>
         """
     st.markdown (ticker_html,unsafe_allow_html = True)
 
@@ -103,9 +108,9 @@ with ticker_col:
 
 total_revenue = filtered_orders ["sales"].sum ()
 total_profit = filtered_orders ["profit"].sum ()
-margin_pct = (total_profit/total_revenue * 100) if total_revenue else 0
+margin_pct = (total_profit / total_revenue * 100) if total_revenue else 0
 order_count = filtered_orders ["order_id"].nunique ()
-high_risk_count = (risk_scores ["risk_tier"] == "High risk").sum ()
+high_risk_count = (risk_scores ["risk_tier"] == "High Risk").sum ()
 
 forecast_sorted = forecast.sort_values ("month")
 future_rows = forecast_sorted.loc [forecast_sorted ["forecast_revenue"].notna (),"forecast_revenue"]
@@ -156,7 +161,7 @@ st.plotly_chart (
 # --- Market performance + sub-category profitability, side by side ---
 
 st.markdown (
-    "<div class='section-heading'>Where the money is & where it isn't -</div>",
+    "<div class='section-heading'>Where the money is and isn't !!</div>",
     unsafe_allow_html = True,
 )
 chart_col1,chart_col2 = st.columns (2)
@@ -179,8 +184,8 @@ with chart_col2:
 
 st.markdown (
     "<div class='section-heading'>Does discounting actually pay off ??</div>",
-    unsafe_allow_html = True,
-)
+    unsafe_allow_html = True,)
+
 st.plotly_chart (
     discount_vs_profit_chart (filtered_orders),
     use_container_width = True,
@@ -191,11 +196,11 @@ st.plotly_chart (
 
 st.markdown (
     "<div class='section-heading'>Risk Watchlist — 15 Worst Performing Segments</div>",
-    unsafe_allow_html = True,
-)
+    unsafe_allow_html = True,)
+
 st.markdown (risk_watchlist_html (risk_scores,limit = 15),unsafe_allow_html = True)
 
-with st.expander (f"View Full Risk Table — All {len (risk_scores)} Segments"):
+with st.expander (f"View Full Risk Table — All {len(risk_scores)} Segments"):
     st.dataframe (
         risk_scores.sort_values ("total_profit"),
         use_container_width = True,
