@@ -1,8 +1,8 @@
-# Global E-Commerce Intelligence Engine
+# OmniCommerce AI (Global E-Commerce Intelligence Engine)
 
-> A big-data analytics platform that transforms raw e-commerce transaction
+> A big data analytics platform that transforms raw e-commerce transaction
 > data into actionable business intelligence — built for the Elite Tech
-> Intern Internship (Data Analytics track).
+> Intern Data Analytics Internship (Big Data Analysis Track)
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)
@@ -14,7 +14,7 @@
 
 This project analyzes 51,290 global e-commerce transactions (2012–2015,
 23 regions) to surface where the business makes money, where it quietly
-loses it, and where revenue is headed next — presented through an
+loses it and where revenue is headed next — presented through an
 interactive dashboard, not a static report.
 
 ## Live demo
@@ -24,7 +24,7 @@ interactive dashboard, not a static report.
 ## Key findings
 
 - **Tables is the only structurally unprofitable sub-category** (–$64K
-  profit overall), driven by average discounts of 38–48% across four
+  profit overall), driven by average discounts of 38–48 % across four
   separate regions — not a one-market anomaly.
 - **A hidden risk pocket in Phones (Western Asia)** only surfaces at
   (sub-category × region) granularity — it's invisible in a
@@ -36,17 +36,17 @@ interactive dashboard, not a static report.
   across 4 candidate models, landing on additive-trend /
   multiplicative-seasonal — the only configuration that produced a
   consistent, plausible year-over-year growth pattern (11.7-point
-  spread vs. 45+ points for the naive default).
+  spread vs 45+ points for the naive default).
 
 ## Features
 
-- [x] Large-scale transaction ingestion and cleaning (Orders, Returns,
+- [x] Large-scale transaction ingestion and cleaning (Orders, Returns 
       and People sheets merged and validated)
 - [x] Profit-risk scoring engine — 390 segments classified into
       Healthy / Watch / High risk tiers
 - [x] Revenue forecasting with automated model selection (Holt-Winters,
       AIC-based)
-- [x] Interactive Streamlit dashboard with market, category, and year
+- [x] Interactive Streamlit dashboard with market, category and year
       filters
 - [x] Live currency exchange rate integration (Frankfurter API)
 - [x] Automated test suite — 12 tests covering data integrity and
@@ -118,4 +118,4 @@ place it there to rebuild the pipeline locally.
 
 ## Author
 
-Built by Inan Biswas as part of the Elite Tech Intern Internship.
+Built by Inan Biswas as part of the Elite Tech Intern Data Analytics Internship (August 2026 - September 2026)
