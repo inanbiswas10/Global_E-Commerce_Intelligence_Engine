@@ -2,8 +2,8 @@
 
 # One-off diagnostic: finds out exactly why 384 orders ended up with a
 # missing regional_manager after merging the People sheet into Orders
-# on 'region'. Run once, read the output, then we fix clean_data.py
-# based on what it shows - no guessing.
+# on 'region'. Run once, read the output then we fix clean_data.py
+# based on what it shows - no guessing
 
 import pandas as pd
 
