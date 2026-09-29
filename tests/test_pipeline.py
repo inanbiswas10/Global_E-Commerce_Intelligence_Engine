@@ -3,7 +3,7 @@
 # Automated checks for the data pipeline (Days 2-3) and the data contracts
 # the dashboard (Day 4) depends on. Not exhaustive - these exist to catch
 # the kind of silent breakage we already hit once (the forecast's missing
-# "month" column) before it reaches the dashboard or a deployment.
+# "month" column) before it reaches the dashboard or a deployment
 
 # Run with: pytest tests/test_pipeline.py -v
 
