@@ -1,6 +1,6 @@
 # app/main.py
 
-# OmniCommerce AI (Global E-Commerce Intelligence Engine) - main Streamlit application
+# Omni-Commerce AI (Global E-Commerce Intelligence Engine) - main Streamlit application
 
 import os
 import sys
@@ -28,7 +28,7 @@ from charts import (
 # --- Page setup ---
 
 st.set_page_config (
-    page_title = "OmniCommerce AI",
+    page_title = "Omni-Commerce AI",
     page_icon = "🌐",
     layout = "wide",
     initial_sidebar_state = "expanded",
