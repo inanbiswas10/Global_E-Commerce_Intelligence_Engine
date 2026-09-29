@@ -13,6 +13,7 @@ import plotly.express as px
 
 # A consistent color palette so every chart in this project looks like
 # it belongs together - we'll reuse this exact list in the dashboard later
+
 PALETTE = ["#1D9E75", "#378ADD", "#D85A30", "#D4537E", "#7F77DD", "#BA7517"]
 
 df = pd.read_parquet("data/processed/orders_clean.parquet")
