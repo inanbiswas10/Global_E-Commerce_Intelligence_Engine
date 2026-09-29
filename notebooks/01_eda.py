@@ -1,11 +1,11 @@
 # %% [markdown]
 # # Day 2 Part B — Exploratory Data Analysis
-# **Global E-Commerce Intelligence Engine — Global Superstore dataset**
+# **Omni-Commerce (Global E-Commerce Intelligence Engine) — Global Superstore dataset**
 #
 # This explores the cleaned dataset (`data/processed/orders_clean.parquet`)
 # to surface the patterns that will shape the core engine (Day 3) and the
-# dashboard (Day 4). Run cells individually in VS Code's Interactive Window,
-# or run the whole file as a script.
+# dashboard (Day 4). Run cells individually in VS Code's Interactive Window
+# or run the whole file as a script
 
 # %%
 import pandas as pd
@@ -19,7 +19,7 @@ df = pd.read_parquet("data/processed/orders_clean.parquet")
 print("Loaded:", df.shape)
 
 # %% [markdown]
-# ## 1. Overview KPIs
+# ## 1) Overview KPIs
 
 # %%
 total_revenue = df["sales"].sum()
@@ -36,9 +36,9 @@ print(f"Unique orders:          {total_orders:,}")
 print(f"Date range:             {date_min} to {date_max}")
 
 # %% [markdown]
-# ## 2. Revenue and profit by market
-# Shows which global markets drive revenue vs. which actually convert
-# that revenue into profit - these are not always the same market.
+# ## 2) Revenue and profit by market
+# Shows which global markets drive revenue vs which actually convert
+# that revenue into profit - these are not always the same market
 
 # %%
 by_market = (
@@ -59,8 +59,8 @@ fig_market = px.bar(
 fig_market.show()
 
 # %% [markdown]
-# ## 3. Monthly revenue trend
-# A time series view - useful for spotting seasonality and growth.
+# ## 3) Monthly revenue trend
+# A time series view - useful for spotting seasonality and growth
 
 # %%
 monthly = (
@@ -81,10 +81,10 @@ fig_trend.update_xaxes(tickangle=45, nticks=20)
 fig_trend.show()
 
 # %% [markdown]
-# ## 4. Top and bottom sub-categories by profit
+# ## 4) Top and bottom sub-categories by profit
 # Some product lines quietly lose money even while selling well - this
 # is exactly the kind of insight that makes an "intelligence engine"
-# useful rather than just decorative.
+# useful rather than just decorative
 
 # %%
 by_subcat = (
@@ -109,9 +109,9 @@ print("\nLowest-profit sub-categories:")
 print(by_subcat.head(3).to_string(index=False))
 
 # %% [markdown]
-# ## 5. Discount vs. profit
-# The classic question: does discounting actually pay off, or does it
-# erode margin past the point of usefulness?
+# ## 5) Discount vs profit
+# The classic question: does discounting actually pay off or does it
+# erode margin past the point of usefulness ??
 
 # %%
 fig_discount = px.scatter(
@@ -129,7 +129,7 @@ fig_discount.show()
 
 # %% [markdown]
 # ## 6. Return rate by category
-# What share of orders in each category come back?
+# What share of orders in each category come back ??
 
 # %%
 return_rate = (
