@@ -11,7 +11,7 @@ RAW_PATH = "data/raw/global_superstore_2016.xlsx"
 
 def standardize_columns (df):
 
-    # Same standardization used in clean_data.py, kept identical on purpose.
+    # Same standardization used in clean_data.py, kept identical on purpose
 
     df = df.copy ()
     df.columns = (
