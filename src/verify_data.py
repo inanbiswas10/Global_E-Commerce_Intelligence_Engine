@@ -1,8 +1,8 @@
 # src/verify_data.py
 
 # Quick sanity check for Day 1: confirms the Global Superstore dataset
-# downloaded correctly and gives a first look at its shape, columns, and
-# (if applicable) sheets. This is not cleaning — just verification.
+# downloaded correctly and gives a first look at its shape, columns and
+# (if applicable) sheets. This is not cleaning — just verification
 
 import os
 import pandas as pd
