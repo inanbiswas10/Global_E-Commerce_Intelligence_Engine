@@ -1,11 +1,11 @@
 # src/risk_engine.py
 
-# Day 3 Part A: Profit-risk scoring engine.
+# Day 3 Part A: Profit-risk scoring engine
 
 # Turns the Day 2 EDA finding (discount-driven margin loss, not returns,
 # is the real risk signal) into a reusable scoring engine. Scores every
 # (sub_category, region) combination and classifies it into a risk tier,
-# so the dashboard can flag exactly where the business is losing money.
+# so the dashboard can flag exactly where the business is losing money
 
 import pandas as pd
 
@@ -27,11 +27,10 @@ def load_clean_data():
 
 def aggregate_by_segment(df):
   
-    """
-    Aggregate metrics per (sub_category, region) - finer-grained than
-    Day 2's sub_category-only view, so regional pockets of risk inside
-    an otherwise healthy sub-category don't get averaged away.
-    """
+    # Aggregate metrics per (sub_category, region) - finer-grained than
+    # Day 2's sub_category-only view, so regional pockets of risk inside
+    # an otherwise healthy sub-category don't get averaged away
+  
     grouped = df.groupby(["sub_category", "region"], as_index=False).agg(
         total_sales=("sales", "sum"),
         total_profit=("profit", "sum"),
@@ -40,6 +39,7 @@ def aggregate_by_segment(df):
     )
 
     # Guard against divide-by-zero for segments with zero sales
+  
     grouped["profit_margin_pct"] = (
         grouped["total_profit"] / grouped["total_sales"].replace(0, pd.NA)
     ) * 100
@@ -48,13 +48,13 @@ def aggregate_by_segment(df):
 
 
 def score_risk(row):
-    """
-    Assigns a risk tier based on profit margin and discount level.
+  
+    # Assigns a risk tier based on profit margin and discount level.
 
-    High risk - actively losing money (negative margin)
-    Watch     - positive but below-average margin, or discount-heavy
-    Healthy   - solid margin, discounting isn't eroding profit
-    """
+    # High risk - actively losing money (negative margin)
+    # Watch     - positive but below-average margin, or discount-heavy
+    # Healthy   - solid margin, discounting isn't eroding profit
+  
     if row["profit_margin_pct"] < MARGIN_HIGH_RISK:
         return "High risk"
     if row["profit_margin_pct"] < MARGIN_WATCH or row["avg_discount"] >= DISCOUNT_WATCH:
@@ -70,6 +70,7 @@ def main():
 
     # Sort so the worst offenders surface first - this order feeds
     # directly into the dashboard's "top risks" table in Day 4
+  
     segments = segments.sort_values("total_profit")
 
     print("Risk tier counts:")
