@@ -1,14 +1,12 @@
-"""
-src/forecast_engine.py
+# src/forecast_engine.py
 
-Day 3 Part B: Revenue forecasting engine.
+# Day 3 Part B: Revenue forecasting engine
 
-Fits several Holt-Winters configurations to monthly revenue and picks
-the best one using AIC (a standard model-selection criterion) rather
-than manually tuning toward a forecast that "looks right." The winning
-model is sanity-checked against year-over-year growth, then combined
-with the actuals into one tidy table for the dashboard.
-"""
+# Fits several Holt-Winters configurations to monthly revenue and picks
+# the best one using AIC (a standard model-selection criterion) rather
+# than manually tuning toward a forecast that "looks right." The winning
+# model is sanity-checked against year-over-year growth, then combined
+# with the actuals into one tidy table for the dashboard
 
 import pandas as pd
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
@@ -30,7 +28,9 @@ CANDIDATE_CONFIGS = [
 
 
 def load_monthly_revenue():
-    """Aggregate cleaned orders into a monthly revenue time series."""
+    
+    # Aggregate cleaned orders into a monthly revenue time series
+    
     df = pd.read_parquet(INPUT_PATH)
 
     monthly = (
@@ -43,7 +43,9 @@ def load_monthly_revenue():
 
 
 def select_best_model(monthly_series):
-    """Fits each candidate config and selects the one with the lowest AIC."""
+    
+    # Fits each candidate config and selects the one with the lowest AIC
+    
     results = []
 
     for config in CANDIDATE_CONFIGS:
@@ -70,7 +72,9 @@ def select_best_model(monthly_series):
 
 
 def sanity_check_forecast(monthly_series, forecast):
-    """Compares each forecasted month to the same calendar month a year earlier."""
+    
+    # Compares each forecasted month to the same calendar month a year earlier
+    
     print("\nSanity check - forecast vs. same month, prior year:")
     growth_rates = []
 
@@ -116,12 +120,14 @@ def main():
     # silently broken before: the forecast Series' index came out unnamed,
     # so reset_index() produced a column called "index" instead of "month",
     # and the old rename(columns={"order_date": "month"}) had nothing to
-    # rename because "order_date" was never actually there.
+    # rename because "order_date" was never actually there
+    
     combined = pd.concat([monthly, forecast], axis=1)
     combined = combined.rename_axis("month").reset_index()
 
     # Verify the schema out loud now, so a silent column-naming bug like
     # this one gets caught immediately next time, not three days later
+    
     print("\nFinal columns:", combined.columns.tolist())
 
     combined.to_parquet(OUTPUT_PATH, index=False)
