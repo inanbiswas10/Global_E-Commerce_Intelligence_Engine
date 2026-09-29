@@ -1,4 +1,4 @@
-# OmniCommerce AI (Global E-Commerce Intelligence Engine)
+# Omni-Commerce AI (Global E-Commerce Intelligence Engine)
 
 > A big data analytics platform that transforms raw e-commerce transaction
 > data into actionable business intelligence — built for the Elite Tech
@@ -112,7 +112,7 @@ python -m pytest tests/test_pipeline.py -v
 ## Dataset
 
 [Global Superstore 2016](https://www.kaggle.com/datasets/tahir1413/global-superstore-2016)
-(Kaggle) — 51,290 orders across US, Canada, LATAM, Europe, Africa, and
+(Kaggle) — 51,290 orders across US, Canada, LATAM, Europe, Africa and
 APAC markets. Not included in this repo (see `data/raw/`); download and
 place it there to rebuild the pipeline locally.
 
