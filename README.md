@@ -23,20 +23,20 @@ interactive dashboard, not a static report.
 
 ## Key findings
 
-- **Tables is the only structurally unprofitable sub-category** (–$64K
-  profit overall), driven by average discounts of 38–48 % across four
+- **Tables is the only structurally unprofitable sub-category** (– $64 K
+  profit overall) driven by average discounts of 38–48 % across four
   separate regions — not a one-market anomaly.
 - **A hidden risk pocket in Phones (Western Asia)** only surfaces at
   (sub-category × region) granularity — it's invisible in a
   category-level view, since Phones is profitable in aggregate.
-- **84 of 390 (sub-category, region) segments — 21.5% — are actively
+- **84 of 390 (sub-category, region) segments — 21.5 % — are actively
   losing money**, identified by a rules-based risk engine grounded in
   the EDA rather than arbitrary thresholds.
 - **6-month revenue forecast** selected objectively via AIC comparison
   across 4 candidate models, landing on additive-trend /
   multiplicative-seasonal — the only configuration that produced a
   consistent, plausible year-over-year growth pattern (11.7-point
-  spread vs 45+ points for the naive default).
+  spread vs 45 + points for the naive default).
 
 ## Features
 
@@ -118,4 +118,4 @@ place it there to rebuild the pipeline locally.
 
 ## Author
 
-Built by Inan Biswas as part of the Elite Tech Intern Data Analytics Internship (August 2026 - September 2026)
+Built by Inan Biswas as part of the Elite Tech Intern Data Analytics Internship (July 2026 - September 2026)
