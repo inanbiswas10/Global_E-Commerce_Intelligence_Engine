@@ -1,9 +1,9 @@
 # app/charts.py
 
 # Reusable Plotly chart builders for the dashboard. Every chart is passed
-# through apply_dark_theme() so the whole dashboard reads as one coherent
-# system, instead of Plotly's default light-themed charts sitting awkwardly
-# on our dark background.
+# through apply_dark_theme () so the whole dashboard reads as one coherent
+# system instead of Plotly's default light-themed charts sitting awkwardly
+# on our dark background
 
 import plotly.express as px
 import plotly.graph_objects as go
@@ -16,7 +16,7 @@ CATEGORICAL_PALETTE = [
 
 def apply_dark_theme (fig,title = None):
 
-    # Applies the dashboard's shared Plotly styling to any figure.
+    # Applies the dashboard's shared Plotly styling to any figure
 
     fig.update_layout (
         paper_bgcolor = "rgba(0,0,0,0)",
@@ -32,7 +32,7 @@ def apply_dark_theme (fig,title = None):
 
 def revenue_trend_chart (forecast_df):
 
-    # Actual monthly revenue with the 6-month forecast as a dashed continuation.
+    # Actual monthly revenue with the 6-month forecast as a dashed continuation
 
     fig = go.Figure ()
 
@@ -50,7 +50,7 @@ def revenue_trend_chart (forecast_df):
 
 def market_performance_chart (filtered_orders):
 
-    # Grouped bar: revenue vs profit by market.
+    # Grouped bar: revenue vs profit by market
 
     by_market = (
         filtered_orders.groupby ("market",as_index = False)
@@ -72,7 +72,7 @@ def market_performance_chart (filtered_orders):
 
 def subcategory_profit_chart (filtered_orders):
 
-    # Horizontal bar of profit by sub-category, colored red for any net loss.
+    # Horizontal bar of profit by sub-category, colored red for any net loss
 
     by_subcat = (
         filtered_orders.groupby ("sub_category",as_index = False)["profit"]
@@ -89,7 +89,7 @@ def subcategory_profit_chart (filtered_orders):
 
 def discount_vs_profit_chart (filtered_orders,sample_size = 4000):
 
-    # Scatter of discount rate vs profit, sampled for a readable render.
+    # Scatter of discount rate vs profit, sampled for a readable render
 
     sample = filtered_orders.sample (
         min (sample_size,len (filtered_orders)),random_state = 42)
@@ -105,15 +105,15 @@ def discount_vs_profit_chart (filtered_orders,sample_size = 4000):
 def risk_watchlist_html (risk_df,limit = 15):
 
     # Builds a styled HTML table for the highest-risk segments - a custom
-    # "watchlist" look with a colored left-border stripe per risk tier.
+    # "watchlist" look with a colored left-border stripe per risk tier
 
     # FIX: built as single-line HTML strings with zero internal newlines
     # on purpose. Streamlit's markdown renderer falls back to showing raw
-    # text instead of rendering HTML as soon as it hits 4+ spaces of
-    # indentation or a blank/whitespace-only line - which is exactly what
+    # text instead of rendering HTML as soon as it hits 4 + spaces of
+    # indentation or a blank / whitespace-only line - which is exactly what
     # the previous multi-line, indented version accidentally produced when
     # the row strings got concatenated in a loop. A single unbroken line
-    # sidesteps that failure mode entirely.
+    # sidesteps that failure mode entirely
 
     worst = risk_df.sort_values ("total_profit").head (limit)
     text_secondary = COLORS ["text_secondary"]
