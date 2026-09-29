@@ -19,7 +19,7 @@ interactive dashboard, not a static report.
 
 ## Live demo
 
-**[Open the live dashboard](https://global-ecommerce-intelligence-engine-gta7bwggzhbgqjugpaozt3.streamlit.app)**
+**[Open the live dashboard](https://omni-commerce-ai-global-ecommerce-intelligence-engine.streamlit.app/)**
 
 ## Key findings
 
