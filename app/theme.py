@@ -1,16 +1,16 @@
 # app/theme.py
 
-# Design system for the Global E-Commerce Intelligence Engine dashboard.
+# Design system for the Omni-Commerce (Global E-Commerce Intelligence Engine) dashboard
 
 # Palette concept: a night trading-floor / world-market view rather than a
 # generic light SaaS dashboard - deep indigo base, warm gold accent (tied to
 # currency/commodity trading), with risk-tier colors (emerald/gold/coral)
 # reused directly from the Day 3 risk engine so the color system carries
-# real meaning instead of being decorative.
+# real meaning instead of being decorative
 
 # Typography: IBM Plex Sans for headings and body text, IBM Plex Mono for
 # every number on the page (KPIs, table figures) - a deliberate ledger/
-# precision feel rather than a generic monospace label.
+# precision feel rather than a generic monospace label
 
 import streamlit as st
 
@@ -34,7 +34,7 @@ RISK_TIER_COLORS = {
 
 def inject_theme ():
 
-    # Injects fonts and CSS overrides. Call once, at the top of app/main.py.
+    # Injects fonts and CSS overrides. Call once at the top of app/main.py
 
     st.markdown (
         f"""
