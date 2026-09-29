@@ -28,7 +28,7 @@ from charts import (
 # --- Page setup ---
 
 st.set_page_config (
-    page_title = "Global E-Commerce Intelligence Engine",
+    page_title = "OmniCommerce AI",
     page_icon = "🌐",
     layout = "wide",
     initial_sidebar_state = "expanded",
@@ -79,7 +79,7 @@ header_col,ticker_col = st.columns ([3,1])
 with header_col:
     st.markdown (
         """
-        <div class="hero-wordmark">GLOBAL E-COMMERCE INTELLIGENCE ENGINE</div>
+        <div class="hero-wordmark">OMNI-COMMERCE AI (GLOBAL E-COMMERCE INTELLIGENCE ENGINE)</div>
         <div class="hero-title">Where the business is making money & where it isn't !!</div>
         <div class="hero-subtitle">
             51,290 orders across 23 regions during the period of 2012–2015. Profit-risk scoring
