@@ -1,6 +1,6 @@
 # app/main.py
 
-# Global E-Commerce Intelligence Engine - main Streamlit application.
+# OmniCommerce AI (Global E-Commerce Intelligence Engine) - main Streamlit application
 
 import os
 import sys
@@ -9,8 +9,8 @@ import sys
 # `streamlit run app\main.py` resolved sibling imports (theme, data_loader,
 # charts) without this - but Streamlit Community Cloud's container doesn't
 # extend that same courtesy to a main file living inside a subdirectory.
-# This line makes the import work identically on any platform, instead of
-# depending on that environment-specific behavior.
+# This line makes the import work identically on any platform instead of
+# depending on that environment-specific behavior
 
 sys.path.insert (0,os.path.dirname (os.path.abspath (__file__)))
 
